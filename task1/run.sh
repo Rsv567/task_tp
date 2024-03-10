@@ -48,4 +48,3 @@ done
 tar -czf "${INPUT_FOLDER}/${BACKUP_ARCHIVE_NAME}" -C "${INPUT_FOLDER}" "${BACKUP_FOLDER}"
 
 echo "done"
-

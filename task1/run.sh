@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
 while [[ $# -gt 0 ]]; do
     parametr="$1"
 
@@ -9,18 +13,13 @@ while [[ $# -gt 0 ]]; do
         shift
         shift
         ;;
-        --extension)
-        EXTENSION="$2"
-        shift
-        shift
-        ;;
         --backup_folder)
-        BACKUP_FOLDER="$2"
+        BACKUP_FOLDER="$SCRIPT_DIR/$2"
         shift
         shift
         ;;
         --backup_archive_name)
-        BACKUP_ARCHIVE_NAME="$2"
+        BACKUP_ARCHIVE_NAME="$SCRIPT_DIR/$2"
         shift
         shift
         ;;
@@ -30,21 +29,23 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-mkdir -p "${INPUT_FOLDER}/${BACKUP_FOLDER}"
 
-find "$INPUT_FOLDER" -name "*.$EXTENSION" -type f | while read file; do
+mkdir -p "${BACKUP_FOLDER}"
+
+find "$INPUT_FOLDER" -type f | while read file; do
     filename=$(basename -- "$file")
-    if [ -f "${INPUT_FOLDER}/${BACKUP_FOLDER}/${filename}" ]; then
+    if [ -f "${BACKUP_FOLDER}/${filename}" ]; then
         index=1
-        while [ -f "${INPUT_FOLDER}/${BACKUP_FOLDER}/${filename%.*}_${index}.${filename##*.}" ]; do
+        while [ -f "${BACKUP_FOLDER}/${filename%.*}_${index}.${filename##*.}" ]; do
             ((index++))
         done
-        cp "$file" "${INPUT_FOLDER}/${BACKUP_FOLDER}/${filename%.*}_${index}.${filename##*.}"
+        cp "$file" "${BACKUP_FOLDER}/${filename%.*}_${index}.${filename##*.}"
     else
-        cp "$file" "${INPUT_FOLDER}/${BACKUP_FOLDER}/$filename"
+        cp "$file" "${BACKUP_FOLDER}/$filename"
     fi
 done
 
-tar -czf "${INPUT_FOLDER}/${BACKUP_ARCHIVE_NAME}" -C "${INPUT_FOLDER}" "${BACKUP_FOLDER}"
+tar -czf "${BACKUP_ARCHIVE_NAME}" -C "$(dirname $BACKUP_FOLDER)" "$(basename $BACKUP_FOLDER)"
 
 echo "done"
+

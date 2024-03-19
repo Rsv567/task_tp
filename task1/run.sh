@@ -1,29 +1,32 @@
 #!/bin/bash
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 while [[ $# -gt 0 ]]; do
-    parametr="$1"
+    parameter="$1"
 
-    case $parametr in
+    case $parameter in
         --input_folder)
-        INPUT_FOLDER="$2"
-        shift
-        shift
-        ;;
+            INPUT_FOLDER="$2"
+            shift
+            shift
+            ;;
+        --extension)
+            EXTENSION="$2"
+            shift
+            shift
+            ;;
         --backup_folder)
-        BACKUP_FOLDER="$SCRIPT_DIR/$2"
-        shift
-        shift
-        ;;
+            BACKUP_FOLDER="$2"
+            shift
+            shift
+            ;;
         --backup_archive_name)
-        BACKUP_ARCHIVE_NAME="$SCRIPT_DIR/$2"
-        shift
-        shift
-        ;;
+            BACKUP_ARCHIVE_NAME="$2"
+            shift
+            shift
+            ;;
         *)
-        shift
-        ;;
+            shift
+            ;;
     esac
 done
 
@@ -33,19 +36,19 @@ else
     mkdir -p "${BACKUP_FOLDER}"
 fi
 
-find "$INPUT_FOLDER" -type f | while read file; do
+find "$INPUT_FOLDER" -name "*.$EXTENSION" -type f | while read file; do
     filename=$(basename -- "$file")
-    expected_name="${BACKUP_FOLDER}/${filename}"
-    
-    if [ -f "$expected_name" ]; then
+    if [ -f "${BACKUP_FOLDER}/${filename}" ]; then
         index=1
-        while [ -f "${expected_name%.*}_${index}.${filename##*.}" ]; do
+        expected_name="${BACKUP_FOLDER}/${filename%.*}_${index}.${filename##*.}"
+        while [ -f "$expected_name" ]; do
             ((index++))
-            expected_name="${expected_name%.*}_${index}.${filename##*.}"
+            expected_name="${BACKUP_FOLDER}/${filename%.*}_${index}.${filename##*.}"
         done
+        cp "$file" "$expected_name"
+    else
+        cp "$file" "${BACKUP_FOLDER}/$filename"
     fi
-    
-    cp "$file" "$expected_name"
 done
 
 tar -czf "${BACKUP_ARCHIVE_NAME}" -C "$(dirname $BACKUP_FOLDER)" "$(basename $BACKUP_FOLDER)"

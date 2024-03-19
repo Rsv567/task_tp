@@ -1,0 +1,8 @@
+/home/rsv567/cmake_exircise/build/CMakeFiles/edit_cache.dir
+/home/rsv567/cmake_exircise/build/CMakeFiles/rebuild_cache.dir
+/home/rsv567/cmake_exircise/build/B/CMakeFiles/lib.dir
+/home/rsv567/cmake_exircise/build/B/CMakeFiles/edit_cache.dir
+/home/rsv567/cmake_exircise/build/B/CMakeFiles/rebuild_cache.dir
+/home/rsv567/cmake_exircise/build/C/CMakeFiles/main.dir
+/home/rsv567/cmake_exircise/build/C/CMakeFiles/edit_cache.dir
+/home/rsv567/cmake_exircise/build/C/CMakeFiles/rebuild_cache.dir

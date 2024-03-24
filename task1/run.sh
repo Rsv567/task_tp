@@ -31,10 +31,10 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [ -d "$BACKUP_FOLDER" ]; then
-    echo "Backup folder already exists."
-else
-    mkdir -p "${BACKUP_FOLDER}"
+    rm -rf "$BACKUP_FOLDER"
 fi
+mkdir -p "${BACKUP_FOLDER}"
+
 
 find "$INPUT_FOLDER" -name "*.$EXTENSION" -type f | while read file; do
     filename=$(basename -- "$file")

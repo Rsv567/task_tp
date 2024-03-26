@@ -6,5 +6,7 @@ target_link_libraries(main lib)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/../bin)
 
+
 install(TARGETS main DESTINATION bin) 
+
 set_target_properties(main PROPERTIES OUTPUT_NAME C)

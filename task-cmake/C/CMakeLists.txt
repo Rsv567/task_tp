@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
-add_executable(main main.cpp)
+add_executable(main main.cpp main.h)
+add_dependencies(main GenerateIndex)
+target_include_directories(main PUBLIC  ${PROJECT_SOURCE_DIR})
 target_link_libraries(main lib)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/../bin)

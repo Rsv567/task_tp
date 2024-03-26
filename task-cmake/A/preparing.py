@@ -1,6 +1,11 @@
-#!/usr/bin/env python3
+import os
 
-with open("index.h", "w") as f:
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+file_path = os.path.join(current_dir, 'index.h')
+
+with open(file_path, "w") as f:
     f.write("#ifndef MY_MODULE_H\n")
     f.write("#define MY_MODULE_H\n\n")
     f.write("#include <iostream>\n")
@@ -9,3 +14,4 @@ with open("index.h", "w") as f:
     f.write("}\n")
 
     f.write("#endif // MY_MODULE_H\n")
+print("dffhrhhg")

@@ -1,9 +1,7 @@
 
 cmake_minimum_required(VERSION 2.6)
 
-project(main)
-
-
+project(C)
 add_custom_target( 
   GenerateIndex
   DEPENDS A/preparing.py
@@ -13,5 +11,4 @@ add_custom_target(
 
 add_subdirectory(B)
 add_subdirectory(C)
-
 

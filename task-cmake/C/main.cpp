@@ -1,5 +1,5 @@
 #include "main.h"
 int main(){
-  function();
-  hello_world();
+  std::cout<<function(2,3)<<"\n";
+  std::cout<<hello_world();
 }

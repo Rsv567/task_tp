@@ -1,5 +1,5 @@
 #ifndef FUNC
 #define FUNC
 #include<iostream>
-void function();
+int function(int, int);
 #endif //Function__

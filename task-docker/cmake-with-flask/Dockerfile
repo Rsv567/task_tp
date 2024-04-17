@@ -1,24 +1,36 @@
-
 FROM ubuntu:latest
 
+# Установка необходимых пакетов
+RUN apt-get update && apt-get install -y \
+    cmake \
+    python3 \
+    python3-pip \
+    git
 
-RUN apt-get update && apt-get install -y git
-
-COPY README.md /
-
-COPY print_hello /bin/
-RUN chmod +x /bin/print_hello
-
-RUN apt-get install -y cmake
-
-RUN useradd -ms /bin/bash devops2024user
-
+# Копирование файлов проекта в образ
 COPY . /app
-WORKDIR /app
 
-RUN mkdir build && cd build && cmake .. && make
+# Создание исполняемого файла print_hello
+RUN mkdir -p /bin && \
+    echo '#!/bin/bash\necho "Hello world"' > /bin/print_hello && \
+    chmod +x /bin/print_hello
 
+# Установка git
+RUN apt-get install -y git
+
+# Команды для сборки проекта на cmake
+RUN mkdir -p /app/build && \
+    cd /app/build && \
+    cmake .. && \
+    make
+
+# Создание пользователя devops2024user и установка прав
+RUN useradd -ms /bin/bash devops2024user
+RUN chown -R devops2024user /app
+
+# Пользователь для выполнения команд внутри контейнера
 USER devops2024user
 
-CMD ["python3", "app.py", "--port=8898"]
+# Команда для запуска процесса
+CMD ["/app/bin/C"]
 

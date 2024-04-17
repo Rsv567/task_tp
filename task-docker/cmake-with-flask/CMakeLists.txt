@@ -7,4 +7,5 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${Task6_SOURCE_DIR}/lib)
 
 add_subdirectory(B)
 add_subdirectory(C)
+add_subdirectory(hello)
 

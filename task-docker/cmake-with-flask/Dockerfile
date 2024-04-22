@@ -17,9 +17,6 @@ RUN mkdir -p /bin && \
     echo '#!/bin/bash\necho "Hello world"' > /bin/print_hello && \
     chmod +x /bin/print_hello
 
-# Установка git
-RUN apt-get install -y git
-
 # Команды для сборки проекта на cmake
 RUN mkdir -p /app/build && \
     cd /app/build && \

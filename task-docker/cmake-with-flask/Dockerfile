@@ -5,8 +5,10 @@ RUN apt-get update && apt-get install -y \
     cmake \
     python3 \
     python3-pip \
-    git \
-    python3-flask
+    git 
+
+# Установка Flask
+RUN pip3 install Flask
 
 # Копирование файлов проекта в образ
 COPY . /app

@@ -9,18 +9,21 @@ RUN apt-get update && apt-get install -y \
 
 # Копирование файлов проекта в образ
 COPY . /app
-COPY README.md /app
+COPY README.md /
+
+# Создание исполняемого файла print_hello
+RUN mkdir -p /bin && \
+    echo '#!/bin/bash\necho "Hello world"' > /bin/print_hello && \
+    chmod +x /bin/print_hello
+
+# Установка git
+RUN apt-get install -y git
 
 # Команды для сборки проекта на cmake
 RUN mkdir -p /app/build && \
     cd /app/build && \
     cmake .. && \
     make
-
-# Создание исполняемого файла print_hello
-RUN mkdir -p /bin && \
-    echo '#!/bin/bash\necho "Hello world"' > /bin/print_hello && \
-    chmod +x /bin/print_hello
 
 # Создание пользователя devops2024user и установка прав
 RUN useradd -ms /bin/bash devops2024user
@@ -29,6 +32,6 @@ RUN chown -R devops2024user /app
 # Пользователь для выполнения команд внутри контейнера
 USER devops2024user
 
-# Запуск приложения Flask
+# Команда для запуска процесса
 CMD ["python3", "/app/app.py", "--port", "8898"]
 

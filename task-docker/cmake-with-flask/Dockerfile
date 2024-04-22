@@ -5,10 +5,8 @@ RUN apt-get update && apt-get install -y \
     cmake \
     python3 \
     python3-pip \
-    git 
-
+    git
 RUN pip3 install Flask
-
 # Копирование файлов проекта в образ
 COPY . /app
 COPY README.md /
@@ -36,3 +34,5 @@ USER devops2024user
 
 # Команда для запуска процесса
 CMD ["python3", "/app/app.py", "--port", "8898"]
+
+

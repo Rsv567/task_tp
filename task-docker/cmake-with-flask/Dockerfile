@@ -7,8 +7,6 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     git 
 
-# Установка Flask
-RUN pip3 install Flask
 
 # Копирование файлов проекта в образ
 COPY . /app

@@ -17,6 +17,9 @@ RUN mkdir -p /bin && \
     echo '#!/bin/bash\necho "Hello world"' > /bin/print_hello && \
     chmod +x /bin/print_hello
 
+# Установка git
+RUN apt-get install -y git
+
 # Команды для сборки проекта на cmake
 RUN mkdir -p /app/build && \
     cd /app/build && \
@@ -32,4 +35,3 @@ USER devops2024user
 
 # Команда для запуска процесса
 CMD ["python3", "/app/app.py", "--port", "8898"]
-

@@ -6,7 +6,10 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     git
+
+# Установка Flask
 RUN pip3 install Flask
+
 # Копирование файлов проекта в образ
 COPY . /app
 COPY README.md /
@@ -33,6 +36,5 @@ RUN chown -R devops2024user /app
 USER devops2024user
 
 # Команда для запуска процесса
-CMD ["python3", "/app/app.py", "--port", "8898"]
-
+CMD ["python3", "-u", "/app/app.py", "--host", "0.0.0.0", "--port", "8898"]
 

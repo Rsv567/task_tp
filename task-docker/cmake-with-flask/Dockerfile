@@ -15,6 +15,8 @@ RUN mkdir -p /bin && \
     echo '#!/bin/bash\necho "Hello world"' > /bin/print_hello && \
     chmod +x /bin/print_hello
 
+RUN apt-get install -y git
+
 RUN mkdir -p /app/build && \
     cd /app/build && \
     cmake .. && \

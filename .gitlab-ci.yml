@@ -16,6 +16,8 @@ BuildCode:
     untracked: false
     when: on_success
     expire_in: 8 days
+    paths:
+      - dist/
 
 TestCode:
   stage: test

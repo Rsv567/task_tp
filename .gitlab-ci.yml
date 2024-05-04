@@ -31,7 +31,7 @@ TestCode:
     - apt-get install -y cmake
   script:
     - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist .. && make
-    - ./tas-citests/bin/CTestExe
+    - ./task-ci/bin/CTestExe
   artifacts:
     reports:
       junit: build/report.xml

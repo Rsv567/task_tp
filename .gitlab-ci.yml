@@ -14,7 +14,7 @@ BuildCode:
   script:
     - git clone https://github.com/google/googletest.git
     - cd googletest
-    - mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=../dist .. && make && make install
+    - mkdir build && cd build && cmake ..&& make && make install
   artifacts:
     untracked: false
     when: on_success
@@ -30,7 +30,9 @@ TestCode:
     - apt-get update
     - apt-get install -y cmake
   script:
-    - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist && make
+    - mkdir build && cd build 
+    - cmake .. 
+    - make
     - cd ..
     - bin/CTestExe
   artifacts:

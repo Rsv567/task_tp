@@ -30,7 +30,7 @@ TestCode:
     - apt-get update
     - apt-get install -y cmake
   script:
-    - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist .. && make
+    - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist && make
     - cd ..
     - bin/CTestExe
   artifacts:

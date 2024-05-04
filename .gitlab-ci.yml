@@ -26,8 +26,11 @@ TestCode:
   stage: test
   tags:
     - common
+  before_script:
+    - apt-get update
+    - apt-get install -y cmake
   script:
-    - cd build
+    - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist .. && make
     - ./tests
 
 DeliverCode:

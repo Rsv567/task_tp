@@ -2,7 +2,8 @@ stages:
   - build
   - test
   - deliver
-
+default:
+  image: registry.gitlab.akhcheck.ru/tp2024/registry/gcc:13
 BuildCode:
   stage: build
   tags:

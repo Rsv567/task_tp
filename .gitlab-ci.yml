@@ -14,15 +14,13 @@ BuildCode:
   script:
     - git clone https://github.com/google/googletest.git
     - cd googletest
-    - mkdir build && cd build && cmake .. && make && make install
-    - cd ../..
-    - mkdir build && cd build 
-    - cmake ..
-    - make
-    - ./bin/CTestExe
+    - mkdir build && cd build && cmake ..&& make && make install
   artifacts:
-    reports:
-      junit: build/report.xml
+    untracked: false
+    when: on_success
+    expire_in: 8 days
+    paths:
+      - googletest/dist/
 
 TestCode:
   stage: test
@@ -32,11 +30,14 @@ TestCode:
     - apt-get update
     - apt-get install -y cmake
   script:
+    - git clone https://github.com/google/googletest.git
+    - cd googletest
+    - mkdir build && cd build && cmake .. && make && make install
+    - cd ../..
     - mkdir build && cd build 
-    - cmake .. 
+    - cmake ..
     - make
-    - cd ..
-    - bin/CTestExe
+    - ./bin/CTestExe
   artifacts:
     reports:
       junit: build/report.xml

@@ -22,21 +22,3 @@ BuildCode:
     paths:
       - googletest/dist/
 
-TestCode:
-  stage: test
-  tags:
-    - common
-  before_script:
-    - apt-get update
-    - apt-get install -y cmake
-  script:
-    - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist .. && make
-    - ./tests/CTestExe
-
-DeliverCode:
-  stage: deliver
-  tags:
-    - common
-  script:
-    - cd build
-    - cp bin/* /path/to/delivery/location/

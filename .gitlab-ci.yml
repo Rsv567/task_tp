@@ -1,32 +1,31 @@
-   stages:
-     - build
-     - test
-     - deliver
+stages:
+  - build
+  - test
+  - deliver
 
-   BuildCode:
-     stage: build
-     tags:
-       - common
-     script:
-       - mkdir build
-       - cd build
-       - cmake ..
-       - make
+BuildCode:
+  stage: build
+  tags:
+    - common
+  script:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
 
-   TestCode:
-     stage: test
-     tags:
-       - common
-     script:
-       - cd build
-       - ./tests
+TestCode:
+  stage: test
+  tags:
+    - common
+  script:
+    - cd build
+    - ./tests
 
-   DeliverCode:
-     stage: deliver
-     tags:
-       - common
-     artifacts:
-       paths:
-         - bin/
-         - lib/
-   
+DeliverCode:
+  stage: deliver
+  tags:
+    - common
+  artifacts:
+    paths:
+      - bin/
+      - lib/

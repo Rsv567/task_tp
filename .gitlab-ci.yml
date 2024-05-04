@@ -21,9 +21,7 @@ BuildCode:
     expire_in: 8 days
     paths:
       - googletest/dist/
-    junit:
-      - build/report.xml
-
+  
 TestCode:
   stage: test
   tags:

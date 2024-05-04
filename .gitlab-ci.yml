@@ -6,7 +6,7 @@ stages:
 BuildCode:
   stage: build
   tags:
-    - <указать тег для runner-а>
+    - common
   script:
     - mkdir build
     - cd build
@@ -16,7 +16,7 @@ BuildCode:
 TestCode:
   stage: test
   tags:
-    - <указать тег для runner-а>
+    - common
   script:
     - cd build
     - ./tests
@@ -24,7 +24,7 @@ TestCode:
 DeliverCode:
   stage: deliver
   tags:
-    - <указать тег для runner-а>
+    - common
   script:
     - cd build
     - cp bin/* /path/to/delivery/location/

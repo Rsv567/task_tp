@@ -21,6 +21,8 @@ BuildCode:
     expire_in: 8 days
     paths:
       - googletest/dist/
+    junit:
+      - build/report.xml
 
 TestCode:
   stage: test
@@ -33,5 +35,5 @@ TestCode:
     - apt-get install -y cmake
   script:
     - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist .. && make
-    - ./tests/CTestExe
+    - ./bin/CTestExe
 

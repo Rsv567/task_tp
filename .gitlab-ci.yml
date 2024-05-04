@@ -9,10 +9,13 @@ BuildCode:
   tags:
     - common
   script:
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
+    - git clone https://github.com/google/googletest.git
+    - cd gtest
+    - mkdir build && cd build && cmake - DCMAKE_INSTALL_PREFIX=../dist && make && make install
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: 8 days
 
 TestCode:
   stage: test

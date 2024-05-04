@@ -32,7 +32,7 @@ TestCode:
   script:
     - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist .. && make
     - cd ..
-    - ./bin/CTestExe
+    - bin/CTestExe
   artifacts:
     reports:
       junit: build/report.xml

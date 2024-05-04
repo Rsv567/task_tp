@@ -33,5 +33,5 @@ TestCode:
     - apt-get install -y cmake
   script:
     - mkdir build && cd build && cmake -DGTEST_ROOT=../googletest/dist .. && make
-    - ./bin/CTestExe
+    - ./bin/TaskCI
 

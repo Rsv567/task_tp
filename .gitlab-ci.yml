@@ -41,10 +41,24 @@ TestCode:
       - task-ci/lib
       - task-ci/bin
     reports:
-      junit: task-ci/bin/report.xml
+      junit: report.xml
 
 DeliverCode:
   stage: deliver
+  before_script:
+    - apt-get update
+    - apt-get install -y cmake
   script:
-    - cd build
-    - cp bin/* /path/to/delivery/location/
+    - cd task-ci
+    - mkdir dist
+    - cd dist
+    - mkdir exe
+    - cd ..
+    - cp -R lib dist/exe
+    - cp -R bin dist/exe
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: 30 days
+    paths:
+      - task-ci/dist/exe

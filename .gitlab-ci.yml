@@ -20,7 +20,8 @@ BuildCode:
     when: on_success
     expire_in: 8 days
     paths:
-      - googletest/dist/
+      - cd task-ci/bin
+      - cd task-ci/lib
 
 TestCode:
   stage: test
@@ -31,7 +32,7 @@ TestCode:
     - apt-get install -y cmake
   script:
     - cd task-ci/bin
-    - ./CTestEex --gtest_output=xml:report.xml
+    - ./CTestEexe --gtest_output=xml:report.xml
   artifacts:
     paths:
       - cd task-ci/bin

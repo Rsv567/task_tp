@@ -4,29 +4,32 @@ stages:
   - deliver
 default:
   image: gcc
+  tags:
+    - coomon
 BuildCode:
   stage: build
-  tags:
-    - common
   before_script:
     - apt-get update
     - apt-get install -y cmake git
   script:
+    - cd task-ci && cd cd 3rdparty
     - git clone https://github.com/google/googletest.git
     - cd googletest
     - mkdir build && cd build && cmake ..&& make && make install
+    - cd ../../../
+    - mkdir build && cd build
+    - export GOOGLE_TEST_DIR=googletest
+    - cmake .. && make
   artifacts:
     untracked: false
     when: on_success
-    expire_in: 8 days
+    expire_in: 20 days
     paths:
-      - cd task-ci/bin
-      - cd task-ci/lib
+      - task-ci/bin
+      - task-ci/lib
 
 TestCode:
   stage: test
-  tags:
-    - common
   before_script:
     - apt-get update
     - apt-get install -y cmake
@@ -35,15 +38,13 @@ TestCode:
     - ./CTestEexe --gtest_output=xml:report.xml
   artifacts:
     paths:
-      - cd task-ci/bin
-      - cd task-ci/lib
+      - task-ci/lib
+      - task-ci/bin
     reports:
       junit: task-ci/bin/report.xml
 
 DeliverCode:
   stage: deliver
-  tags:
-    - common
   script:
     - cd build
     - cp bin/* /path/to/delivery/location/

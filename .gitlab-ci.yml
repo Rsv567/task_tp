@@ -5,7 +5,7 @@ stages:
 default:
   image: gcc
   tags:
-    - coomon
+    - common
 BuildCode:
   stage: build
   before_script:

@@ -35,7 +35,7 @@ TestCode:
     - apt-get install -y cmake
   script:
     - cd task-ci/bin
-    - ./CTestEexe --gtest_output=xml:report.xml
+    - ./CTestExe --gtest_output=xml:report.xml
   artifacts:
     paths:
       - task-ci/lib

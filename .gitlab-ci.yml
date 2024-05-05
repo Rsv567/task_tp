@@ -35,14 +35,16 @@ TestCode:
     - apt-get update
     - apt-get install -y cmake
   script:
-    - cd task-ci/bin
+    - cd task-ci
+    - cd bin
     - ./CTestExe --gtest_output=xml:report.xml
   artifacts:
+    reports:
+      junit: task-ci/bin/report.xml
     paths:
       - task-ci/lib
       - task-ci/bin
-    reports:
-      junit: report.xml
+    
 
 DeliverCode:
   stage: deliver

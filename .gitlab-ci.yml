@@ -30,17 +30,14 @@ TestCode:
     - apt-get update
     - apt-get install -y cmake
   script:
-    - git clone https://github.com/google/googletest.git
-    - cd googletest
-    - mkdir build && cd build && cmake .. && make && make install
-    - cd ../..
-    - mkdir build && cd build 
-    - cmake ..
-    - make
-    - ./bin/CTestExe
+    - cd task-ci/bin
+    - ./CTestEex --gtest_output=xml:report.xml
   artifacts:
+    paths:
+      - cd task-ci/bin
+      - cd task-ci/lib
     reports:
-      junit: build/report.xml
+      junit: task-ci/bin/report.xml
 
 DeliverCode:
   stage: deliver
